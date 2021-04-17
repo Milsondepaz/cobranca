@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 /**
  *
@@ -27,8 +29,10 @@ public class Titulo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long codigo;
     private String descricao;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
     private Date dataVencimento;
+    @NumberFormat(pattern = "#,##0.00")
     private BigDecimal valor;
     @Enumerated(EnumType.STRING)
     private StatusTitulo status;
@@ -72,6 +76,11 @@ public class Titulo {
     public void setStatus(StatusTitulo status) {
         this.status = status;
     }
+    
+    
+    public boolean isPendente(){        
+        return StatusTitulo.PENDENTE.equals(this.status);
+    }
 
     @Override
     public int hashCode() {
@@ -97,5 +106,12 @@ public class Titulo {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Titulo{" + "codigo=" + codigo + ", descricao=" + descricao + ", dataVencimento=" + dataVencimento + ", valor=" + valor + ", status=" + status + '}';
+    }
+    
+    
 
 }

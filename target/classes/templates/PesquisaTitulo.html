@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{LayoutPadrao}">
+    <head>
+        <title>Cadastro de título</title>
+    </head>    
+
+    <section layout:fragment="conteudo">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <dvi class="clearfix">
+                    <h1 class="panel-title aw-titulo-panel">Pesquisa de título</h1>                
+                    <a class="btn btn-link aw-link-panel" href="/">Novo título</a>
+                </dvi>
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class ="text-center col-md-1">#</th>
+                            <th>Descricao</th>
+                            <th class ="text-center col-md-2">Data de vencimento</th>
+                            <th class ="text-right col-md-2">Valor</th>
+                            <th class ="text-center col-md-2">Status</th>
+                            <th class ="col-md-1"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr th:each = "titulo: ${titulos}">
+
+                            <td class ="text-center col-md-1" th:text="${titulo.codigo}"></td>
+                            <td th:text="${titulo.descricao}"></td>
+                            <td class ="text-center" th:text="${{titulo.dataVencimento}}"></td>
+                            <td class ="text-right" th:text="|€ ${{titulo.valor}}|"></td>                           
+                            <td class="text-center">
+                                <span class="label" th:text="${titulo.status.descricao}"
+                                      th:classappend="${titulo.isPendente() ? 'label-danger' : 'label-success'}"></span>
+                            </td>
+                            <td class="text-center">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" th:if= "${#lists.isEmpty(titulos)}">Nenhum titulo foi encontrado</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>                        
+        </div>
+    </section>
+</html>
