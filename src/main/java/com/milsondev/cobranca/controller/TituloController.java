@@ -86,6 +86,7 @@ public class TituloController {
     @RequestMapping(value = "delete/{codigo}", method = RequestMethod.DELETE)
     public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
         
+        //System.out.println(codigo);
         
         cadastroTituloService.excluir(codigo);
         attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
