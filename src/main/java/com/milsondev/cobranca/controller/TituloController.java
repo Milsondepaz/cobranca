@@ -8,11 +8,11 @@ package com.milsondev.cobranca.controller;
 import com.milsondev.cobranca.model.StatusTitulo;
 import com.milsondev.cobranca.model.Titulo;
 import com.milsondev.cobranca.repository.TituloRepository;
+import com.milsondev.cobranca.repository.filter.TituloFilter;
 import com.milsondev.cobranca.service.CadastroTituloService;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,12 +32,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class TituloController {
 
     private static final String CADASTRO_VIEW = "CadastroTitulo";
-
-    @Autowired
-    private TituloRepository tituloRepository;
-
     @Autowired
     private CadastroTituloService cadastroTituloService;
+    
+    @Autowired
+    private TituloRepository tituloRepository;
 
     @RequestMapping("")
     public ModelAndView novo() {
@@ -62,8 +62,12 @@ public class TituloController {
     }
 
     @RequestMapping("/titulos")
-    public ModelAndView pesquisar() {
-        List<Titulo> todosTitulos = tituloRepository.findAll();
+    public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro) {        
+        //filtro.setDescricao("");        
+        //System.out.println(filtro.getDescricao());       
+        List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro);        
+        //String descricao = filtro.getDescricao() == null ? "%" : filtro.getDescricao();        
+        //List<Titulo> todosTitulos = tituloRepository.findByDescricaoContaining(descricao);                
         ModelAndView mv = new ModelAndView("PesquisaTitulo");
         mv.addObject("titulos", todosTitulos);
         return mv;
@@ -76,17 +80,25 @@ public class TituloController {
         return mv;
     }
 
-    @ModelAttribute("todosStatusTitulo")
-    public List<StatusTitulo> todosStatusTitulo() {
-        return Arrays.asList(StatusTitulo.values());
-    }
-
-    @RequestMapping("delete/{codigo}")
+    @RequestMapping(value = "delete/{codigo}", method = RequestMethod.DELETE)
     public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
         cadastroTituloService.excluir(codigo);
         attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
         return "redirect:/titulos";
 
+    }
+
+    
+    // ResponseBody- nao retorna uma view rotorna a mensagem no body da requiscao
+    @RequestMapping(value = "receber/{codigo}", method = RequestMethod.PUT)
+    public @ResponseBody
+    String receber(@PathVariable Long codigo) {
+        return cadastroTituloService.receber(codigo);
+    }
+
+    @ModelAttribute("todosStatusTitulo")
+    public List<StatusTitulo> todosStatusTitulo() {
+        return Arrays.asList(StatusTitulo.values());
     }
 
 }

@@ -6,14 +6,15 @@
 package com.milsondev.cobranca.repository;
 
 import com.milsondev.cobranca.model.Titulo;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Mein
  */
-public interface TituloRepository extends JpaRepository<Titulo, Long>{
-    
-    
-    
+public interface TituloRepository extends JpaRepository<Titulo, Long> {
+
+    public List<Titulo> findByDescricaoContaining(String descricao);
+
 }

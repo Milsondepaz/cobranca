@@ -15,7 +15,7 @@ and open the template in the editor.
 
     <section layout:fragment="conteudo">
 
-        <form class="form-horizontal" method="POST" action="/novotitulo" th:object="${titulo}">
+        <form class="form-horizontal" method="POST" action="@{/novotitulo}" th:object="${titulo}">
             <div th:replace="MensagemGeral"></div>
             <div th:replace="MensagemErro"></div>
             <div class="panel panel-default">
@@ -23,7 +23,7 @@ and open the template in the editor.
                 <div class="panel-heading">
                     <dvi class="clearfix">
                         <h1 class="panel-title aw-titulo-panel">Novo título</h1>                
-                        <a class="btn btn-link aw-link-panel" href="/titulos">Voltar para pesquisa</a>
+                        <a class="btn btn-link aw-link-panel" th:href="@{/titulos}">Voltar para pesquisa</a>
                     </dvi>
                 </div>
 
@@ -59,7 +59,7 @@ and open the template in the editor.
                     <div class="form-group">
                         <label for="status" class="col-sm-2 control-label">Status</label>
                         <div class="col-sm-2">
-                            <select class="form-control" name="status">
+                            <select class="form-control" name="status" th:field="*{status}">
                                 <option th:each ="status: ${todosStatusTitulo}" th:value="${status}" th:text="${status.descricao}"></option>
                             </select>
                         </div>

@@ -10,7 +10,7 @@ and open the template in the editor.
 
     <div class="modal fade" id="confirmacaoExclusaoModal" tabindex="-1" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
-            <form th:attr="data-url-base='/delete'" method="POST">
+            <form th:attr="data-url-base=@{/delete}" method="POST">
                 <input type="hidden" name="_method" value="DELETE"/>
 
                 <div class="modal-content">
