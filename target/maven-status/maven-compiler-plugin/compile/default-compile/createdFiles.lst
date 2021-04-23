@@ -1,2 +1,8 @@
+com\milsondev\cobranca\repository\filter\TituloFilter.class
 com\milsondev\cobranca\CobrancaApplication.class
+com\milsondev\cobranca\service\CadastroTituloService.class
 com\milsondev\cobranca\ServletInitializer.class
+com\milsondev\cobranca\controller\TituloController.class
+com\milsondev\cobranca\repository\TituloRepository.class
+com\milsondev\cobranca\model\StatusTitulo.class
+com\milsondev\cobranca\model\Titulo.class

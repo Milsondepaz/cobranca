@@ -13,9 +13,9 @@ and open the template in the editor.
         <title>Cadastro de título</title>
     </head>
 
-    <section layout:fragment="conteudo">
+    <section layout:fragment="conteudo">         
 
-        <form class="form-horizontal" method="POST" action="@{/novotitulo}" th:object="${titulo}">
+        <form class="form-horizontal" method="POST" th:action="@{/novotitulo}" th:object="${titulo}">
             <div th:replace="MensagemGeral"></div>
             <div th:replace="MensagemErro"></div>
             <div class="panel panel-default">
@@ -39,7 +39,7 @@ and open the template in the editor.
                     </div>
 
                     <div class="form-group" th:classappend="${#fields.hasErrors('dataVencimento')} ? 'has-error'">
-                        <label for="dataVencimento" class="col-sm-2 control-label">Data de vencimento</label>
+                        <label  class="col-sm-2 control-label">Data de vencimento</label>
                         <div class="col-sm-2">  
                             <input type="text" class="form-control" id="dataVencimento" th:field="*{dataVencimento}"
                              data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="tp-BR"
