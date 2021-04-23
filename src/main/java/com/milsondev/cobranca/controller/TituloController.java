@@ -31,7 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class TituloController {
 
-    private static final String CADASTRO_VIEW = "CadastroTitulo";
+    private static final String INDEX = "index";
     @Autowired
     private CadastroTituloService cadastroTituloService;
     
@@ -40,7 +40,7 @@ public class TituloController {
 
     @RequestMapping("")
     public ModelAndView novo() {
-        ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+        ModelAndView mv = new ModelAndView(INDEX);
         mv.addObject(new Titulo());
         return mv;
     }
@@ -51,7 +51,7 @@ public class TituloController {
         
         
         if (errors.hasErrors()) {
-            return CADASTRO_VIEW;
+            return INDEX;
         }
         try {
             cadastroTituloService.salvar(titulo);
@@ -59,7 +59,7 @@ public class TituloController {
             return "redirect:/";
         } catch (IllegalArgumentException e) {
             errors.rejectValue("dataVencimento", null, e.getMessage());
-            return CADASTRO_VIEW;
+            return INDEX;
         }
 
     }
@@ -78,7 +78,7 @@ public class TituloController {
 
     @RequestMapping("{codigo}")
     public ModelAndView edicao(@PathVariable("codigo") Titulo titulo) {
-        ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+        ModelAndView mv = new ModelAndView(INDEX);
         mv.addObject(titulo);
         return mv;
     }

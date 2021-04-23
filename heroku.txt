@@ -1,0 +1,21 @@
+Heroku
+
+1-Baixar  CLI Heroku
+https://devcenter.heroku.com/articles/heroku-cli#getting-started
+
+2- Instalar o CLI Heroku
+
+3- Abrir o CMD e testar seguinte comando para testar se o CLI esta rodando
+heroku --version
+
+4- Fazer o login no Heroku
+heroku login
+Se estiver logado no Browser - apenas pressionar uma tecla.
+
+5- Também pode fazer login pela linha de comando
+heroku login -i
+heroku: Enter your login credentials
+Email: me@example.com
+Password: ***************
+Two-factor code: ********
+Logged in as me@heroku.com
