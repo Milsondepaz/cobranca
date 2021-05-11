@@ -16,16 +16,16 @@ and open the template in the editor.
 
     <section layout:fragment="conteudo">
         <div th:replace="MensagemGeral"></div>
-        <div class="panel panel-default">
+        <div class="panel panel-default" style=" margin-top: 45px">
             <div class="panel-heading">
                 <dvi class="clearfix">
                     <h1 class="panel-title aw-titulo-panel">Pesquisa de título</h1>                
                     <a class="btn btn-link aw-link-panel" th:href="@{/}">Novo título</a>
                 </dvi>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" >
 
-                <form method="GET" class="form-horizontal" th:action="@{/titulos}" th:object="${filtro}">
+                <form method="GET" class="form-horizontal" th:action="@{/titulos}" th:object="${filtro}" >
                     <div class="form-group">
                         <div class="col-sm-4">
                             <div class="input-group">

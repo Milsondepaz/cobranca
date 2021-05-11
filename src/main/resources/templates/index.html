@@ -16,7 +16,7 @@ and open the template in the editor.
 
     <section layout:fragment="conteudo">         
 
-        <form class="form-horizontal" method="POST" th:action="@{/novotitulo}" th:object="${titulo}">
+        <form class="form-horizontal" method="POST" th:action="@{/novotitulo}" th:object="${titulo}" style=" padding-top: 45px">
             <div th:replace="MensagemGeral"></div>
             <div th:replace="MensagemErro"></div>
             <div class="panel panel-default">
